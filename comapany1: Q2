@@ -1,0 +1,31 @@
+// Leetcode-216. Combination Sum III
+
+class Solution {
+public:
+    vector<vector<int>>ans;
+    
+    void solve(int j,int k,int sum,vector<int>op,int target )
+    {
+        if(op.size()==k)
+        {
+            if(sum==target)
+                ans.push_back(op);
+            return;
+        }
+        
+        if(sum>target)
+            return;
+        
+        for(int i=j;i<=9;i++)
+        {
+            op.push_back(i);
+            solve(i+1,k,sum+i,op,target);
+            op.pop_back();
+        }
+    }
+    
+    vector<vector<int>> combinationSum3(int k, int n) {
+        solve(1,k,0,{},n);
+        return ans;
+    }
+};
