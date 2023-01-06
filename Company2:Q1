@@ -1,0 +1,32 @@
+// leetcode: 149. Max Points on a Line
+
+
+int maxPoints(vector<vector<int>>& points) {
+        int n=points.size();
+        
+        if(n<2)
+            return n;
+        
+        sort(points.begin(),points.end());
+        
+        int max=-1;
+        for(int i=0;i<n;i++)
+        {
+            unordered_map<double long,int>mp;
+            for(int j=0;j<n;j++)
+            {
+                if(j==i)
+                    continue;
+                
+                long double m = (long double) (points[j][1]-points[i][1]) /(points[j][0]-points[i][0]);
+                mp[m]++;
+            }
+            
+            for(auto x :mp)
+               if(x.second>max)
+                   max=x.second;
+        }
+        
+        return max+1;
+        
+    }
